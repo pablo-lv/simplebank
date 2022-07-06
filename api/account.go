@@ -8,8 +8,8 @@ import (
 )
 
 type createAccountRequest struct {
-	Owner    string `json:"owner" binding:"required, min=1"`
-	Currency string `json:"currency" binding:"required, oneof=USD MXN"`
+	Owner    string `json:"owner" binding:"required,min=1"`
+	Currency string `json:"currency" binding:"required,currency`
 }
 
 type getAccountRequest struct {

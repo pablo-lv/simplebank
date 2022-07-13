@@ -10,10 +10,10 @@ import (
 )
 
 type createUserRequest struct {
-	Username string `json:"username" binding:"required"`
+	Username string `json:"username" binding:"required,alphanum"`
 	Password string `json:"password" binding:"required,min=6"`
 	FullName string `json:"full_name" biding:"required"`
-	Email    string `json:"email" biding:"required,email"`
+	Email    string `json:"email" binding:"required,email"`
 }
 
 type createUserResponse struct {

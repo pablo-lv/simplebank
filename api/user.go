@@ -25,9 +25,8 @@ type userResponse struct {
 }
 
 type loginUserRequest struct {
-	AccessToken string       `json:"access_token"`
-	User        userResponse `json:"user"`
-	Password    string       `json:"password"`
+	Username string `json:"username" binding:"required,alphanum"`
+	Password string `json:"password" binding:"required,min=6"`
 }
 
 type loginUserResponse struct {
@@ -88,7 +87,7 @@ func (server *Server) loginUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
 
-	user, err := server.store.GetUser(ctx, req.User.Username)
+	user, err := server.store.GetUser(ctx, req.Username)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
